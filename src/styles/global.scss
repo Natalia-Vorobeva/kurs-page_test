@@ -1,0 +1,280 @@
+@font-face {
+  font-family: 'BERNIERDISTRESSED-REGULAR';
+  src: url('/fonts/BERNIERDISTRESSED-REGULAR.OTF') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+// ПЕРЕМЕННЫЕ
+:root {
+  --color-primary: #FFA245;
+  --color-secondary: #4F7290;
+  --color-accent: #D78C69;
+  --color-light: #FFD6B6;
+  --color-text: #000000;
+  --color-text-light: #ffffff;
+  --color-background: #ffffff;
+  --color-gray-light: #f8f9fa;
+  
+  --font-primary: 'PT Sans', sans-serif;
+  --font-heading: 'BERNIERDISTRESSED', sans-serif;
+  
+  --spacing-xs: 8px;
+  --spacing-sm: 16px;
+  --spacing-md: 32px;
+  --spacing-lg: 64px;
+  --spacing-xl: 128px;
+  
+  --border-radius: 6px;
+  --border-width: 6px;
+  
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.2);
+  
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+}
+
+// МИКСИНЫ
+@mixin smooth-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  &:hover {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == sm {
+    @media (max-width: 576px) { @content; }
+  }
+  @else if $breakpoint == md {
+    @media (max-width: 768px) { @content; }
+  }
+  @else if $breakpoint == lg {
+    @media (max-width: 992px) { @content; }
+  }
+  @else if $breakpoint == xl {
+    @media (max-width: 1200px) { @content; }
+  }
+}
+
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin fade-in($duration: 0.3s) {
+  animation: fadeIn $duration ease;
+}
+
+// БАЗОВЫЕ СТИЛИ 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-primary);
+  font-size: 18px;
+  color: var(--color-text);
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  @include smooth-hover;
+}
+
+// ТИПОГРАФИЯ
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+  text-align: center;
+}
+
+h1 {
+  font-size: 82px;
+  line-height: 74px;
+  @include respond-to(lg) {
+    font-size: 76px;
+    line-height: 70px;
+  }
+  @include respond-to(md) {
+    font-size: 64px;
+    line-height: 60px;
+  }
+  @include respond-to(sm) {
+    font-size: 52px;
+    line-height: 48px;
+  }
+}
+
+h2 {
+  font-size: 64px;
+  line-height: 58px;
+  margin-bottom: 50px;
+  @include respond-to(lg) {
+    font-size: 56px;
+    line-height: 52px;
+  }
+  @include respond-to(md) {
+    font-size: 48px;
+    line-height: 44px;
+  }
+  @include respond-to(sm) {
+    font-size: 40px;
+    line-height: 38px;
+    margin-bottom: 30px;
+  }
+}
+
+ul:not(.list-unstyled):not(.list_bullet):not(.flip):not(.main-navigation__list) {
+  list-style: none;
+  padding-left: 30px;
+  li {
+    position: relative;
+    margin-bottom: 8px;
+    padding-left: 20px;
+    font-size: 18px;
+    line-height: normal;
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.7em;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: var(--color-primary);
+      transform: translateY(-50%);
+    }
+  }
+}
+
+// СЕКЦИИ (только специфичные стили)
+section {
+  padding-top: 100px;
+  padding-bottom: 100px;
+  @include respond-to(md) {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+  @include respond-to(sm) {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+}
+
+#about-course,
+#program,
+#packages,
+#ask {
+  scroll-margin-top: 80px;
+  @include respond-to(lg) {
+    scroll-margin-top: 70px;
+  }
+}
+
+// КНОПКИ
+.button_big {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 21px 48px;
+  max-width: 370px;
+  background: linear-gradient(270deg, #D8775D, #FF8B32);
+  border-radius: 6px;
+  font-size: 18px;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 400;
+  letter-spacing: 2.5px;
+  border: none;
+  cursor: pointer;
+  @include smooth-hover;
+  
+  &:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    background: #DB5314;
+  }
+  
+  @include respond-to(xl) {
+    padding: 21px 20px;
+  }
+  
+  @include respond-to(lg) {
+    padding: 21px 48px;
+  }
+  
+  @include respond-to(sm) {
+    margin: 0 auto;
+    padding: 20px 30px;
+  }
+}
+
+// АНИМАЦИИ (только неконфликтующие)
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in {
+  @include fade-in(0.5s);
+}
+
+// ДОПОЛНИТЕЛЬНЫЕ УТИЛИТЫ (которых нет в Bootstrap)
+
+.text-primary { color: var(--color-primary); }
+.text-secondary { color: var(--color-secondary); }
+.text-accent { color: var(--color-accent); }
+
+.bg-light { background-color: var(--color-light); }
+.bg-gray { background-color: var(--color-gray-light); }
+
+// СКРЫТЫЕ ЭЛЕМЕНТЫ
+
+.visually-hidden {
+  @include visually-hidden;
+}

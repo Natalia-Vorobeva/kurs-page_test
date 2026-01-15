@@ -1,0 +1,197 @@
+.about {
+    padding-top: 120px;
+    /* margin-bottom: 100px; */
+}
+
+
+/* разобраться с заголовками!!! */
+
+.about h2 {
+    margin-bottom: 40px;
+    font-family: "BERNIERDISTRESSED-REGULAR", sans-serif;
+    color: #D78C69;
+    text-align: center;
+    font-size: 82px;
+    line-height: 74px;
+}
+
+.about-text {
+    font-family: "PT Sans", sans-serif;
+}
+
+.about-text p {
+    font-size: 22px;
+    line-height: normal;
+    margin-bottom: 30px;
+    color: #000000;
+}
+
+.about-text strong {
+    color: #4F7290;
+    font-weight: 700;
+}
+
+.about-img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    object-fit: contain;
+}
+
+/* Десктоп (≥ 992px) - две равные колонки в ряд, no wrap */
+@media (min-width: 992px) {
+    .about-row {
+        display: flex;
+        flex-wrap: nowrap;
+        margin: 0 -15px;
+    }
+    
+    .about .col-lg-6 {
+        flex: 0 0 50%;
+        max-width: 570px;
+        padding: 0 15px;
+        box-sizing: border-box;
+    }
+    
+    /* Порядок: картинка слева, текст справа (как в HTML) */
+    .about-row > .col-lg-6:first-child {
+        order: 1;
+    }
+    
+    .about-row > .col-lg-6:last-child {
+        order: 2;
+    }
+}
+
+/* Планшет (768px - 991px) - одна колонка, ширина 690px */
+@media (max-width: 991.98px) and (min-width: 768px) {
+    .about {
+        padding-top: 100px;
+    }
+    
+    .about-row {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .about .col-lg-6 {
+        width: 100%;
+        max-width: 690px; /* 690px для планшетов */
+        padding: 0 15px;
+        box-sizing: border-box;
+    }
+    
+    /* На мобильных меняем порядок: текст сверху, картинка снизу */
+    .about-row > .col-lg-6:first-child {
+        order: 2; /* Картинка становится второй */
+    }
+    
+    .about-row > .col-lg-6:last-child {
+        order: 1; /* Текст становится первым */
+    }
+    
+    .about-text {
+        text-align: center;
+        width: 100%;
+        margin: 0;
+    }
+    
+    .about-img {
+        max-width: 100%;
+        display: block;
+        margin: 0 auto;
+    }
+}
+
+/* Мобильные (до 767px) - одна колонка, ширина 670px */
+@media (max-width: 767.98px) {
+    .about {
+        padding-top: 150px;
+        padding-bottom: 100px;
+    }
+    
+    .about-row {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .about .col-lg-6 {
+        width: 100%;
+        max-width: 670px; /* 670px для мобильных */
+        padding: 0 15px;
+        box-sizing: border-box;
+    }
+    
+    /* На мобильных меняем порядок: текст сверху, картинка снизу */
+    .about-row > .col-lg-6:first-child {
+        order: 2; /* Картинка становится второй */
+    }
+    
+    .about-row > .col-lg-6:last-child {
+        order: 1; /* Текст становится первым */
+    }
+    
+    .about-text {
+        text-align: center;
+        width: 100%;
+        margin: 0;
+    }
+    
+    .about-text p {
+        font-size: 20px;
+        margin-bottom: 19px;
+        margin-top: 15px;
+    }
+    
+    .about-img {
+        max-width: 100%;
+        display: block;
+        margin: 0 auto;
+    }
+}
+
+/* Дополнительные адаптивные стили */
+@media (max-width: 1199.98px) {
+    .about h2 {
+        font-size: 70px;
+        line-height: 64px;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 575.98px) {
+	.about {
+		padding-top: 90px;
+		padding-bottom: 60px;
+	}
+    .about h2 {
+        font-size: 63px;
+        line-height: 59px;
+        margin-bottom: 10px;
+    }
+    
+    .about-text p {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 419.98px) {
+    .about h2 {
+        font-size: 52px;
+        line-height: 47px;
+        letter-spacing: -0.6px;
+        margin-bottom: 0;
+    }
+    
+    .about .col-lg-6 {
+        padding: 0 10px; /* Меньше padding на очень маленьких экранах */
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        max-width: 960px;
+    }
+}

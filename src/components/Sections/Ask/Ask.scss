@@ -1,0 +1,199 @@
+@use '@/styles/global' as *;
+
+.ask {
+    background-image: url(../images/ask/bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    overflow: hidden;
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+				background: linear-gradient(
+					to right,
+					rgba(255, 255, 255, 0.3) 0%,
+					rgba(255, 255, 255, 0.8) 15%,
+					rgba(255, 255, 255, 0.8) 85%,
+					rgba(255, 255, 255, 0.3) 100%
+					);
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    > .container {
+        position: relative;
+        z-index: 2;
+    }
+
+    &__title {
+        font-family: "BERNIERDISTRESSED-REGULAR";
+        color: #D78C69;
+        text-align: center;
+        margin-bottom: 60px;
+        font-size: 82px;
+        line-height: 74px;
+
+        @media (max-width: 991.98px) {
+            font-size: 76px;
+            line-height: 70px;
+        }
+
+        @media (max-width: 767.98px) {
+            font-size: 70px;
+            line-height: 64px;
+        }
+
+        @media (max-width: 575.98px) {
+            font-size: 63px;
+            line-height: 59px;
+        }
+
+        @media (max-width: 419.98px) {
+            font-size: 52px;
+            line-height: 47px;
+            letter-spacing: -0.6px;
+        }
+    }
+
+    &__subtitle {
+        font-family: "PT Sans";
+        font-size: 22px;
+        max-width: 430px;
+        margin: 0 auto;
+        margin-bottom: 20px;
+        text-align: center;
+        line-height: 1.2;
+
+        @media (max-width: 575.98px) {
+            font-size: 20px;
+        }
+    }
+
+    &__row {
+        display: flex;
+        justify-content: center;
+
+        @media (max-width: 767.98px) {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+
+    &__buttons-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+    }
+
+    &__button {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 21px 48px;
+        gap: 10px;
+        width: 100%;
+        max-width: 72%;
+        background: linear-gradient(270deg, #D8775D, #FF8B32);
+        border-radius: 6px;
+        font-size: 18px;
+        color: white;
+        text-transform: uppercase;
+        font-weight: 400;
+        letter-spacing: 2.5px;
+        text-decoration: none;
+        margin: 0 auto;
+        border: none;
+        cursor: pointer;
+        font-family: "PT Sans";
+        
+        // ИСПОЛЬЗУЕМ МИКСИН
+        @include smooth-hover;
+        
+        // Дополнительные свойства для ховера
+        &:hover {
+            background: linear-gradient(270deg, #DB5314, #E5602A);
+            color: white;
+            text-decoration: none;
+        }
+
+        &--telegram {
+            background: linear-gradient(270deg, #D8775D, #FF8B32);
+            
+            &:hover {
+                background: linear-gradient(270deg, #DB5314, #E5602A);
+            }
+        }
+
+        &--whatsapp {
+            background: linear-gradient(270deg, #D8775D, #FF8B32);
+            
+            &:hover {
+                background: linear-gradient(270deg, #DB5314, #E5602A);
+            }
+        }
+
+        @media (max-width: 1199.98px) {
+            padding: 21px 20px;
+        }
+
+        @media (max-width: 991.98px) {
+            max-width: unset;
+            width: 260px;
+            padding: 21px 48px;
+        }
+
+        @media (max-width: 575.98px) {
+            margin: 0 auto;
+            padding: 20px 30px;
+        }
+
+        @media (max-width: 419.98px) {
+            width: 280px;
+        }
+
+        @media (max-width: 481px) {
+            letter-spacing: 0.2px;
+        }
+
+        @media (max-width: 767.98px) {
+            margin-bottom: 30px;
+        }
+    }
+
+    &__button-icon {
+        width: 35px;
+        margin-right: 10px;
+        margin-bottom: 1px;
+        transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        
+        .ask__button:hover & {
+            transform: translateX(4px);
+        }
+    }
+
+    @media (max-width: 575.98px) {
+        background-image: url("../images/ask/bg-mobile.jpg");
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+}
+
+.ask {
+    background-image: url("../images/ask/bg.webp");
+
+    @media (max-width: 575.98px) {
+        background-image: url("../images/ask/bg-mobile.webp");
+    }
+}

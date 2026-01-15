@@ -1,16 +1,15 @@
-# React + Vite
+# 🎨 Петербург сквозь года - Онлайн курс акварели
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Сайт-лендинг для онлайн-курса акварели 
 
-Currently, two official plugins are available:
+## 🌐 Демо
+[Открыть на Vercel](https://petersburg-time-course.vercel.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛠 Стек технологий
+- **React 18** + Vite
+- **Bootstrap 4** для адаптивной верстки
+- **Sass/SCSS** с модульной архитектурой стилей
+- **jQuery 3** для динамических элементов
+- **React Hooks** для управления состоянием
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📁 Структура проекта
