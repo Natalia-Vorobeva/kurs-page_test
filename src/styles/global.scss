@@ -40,6 +40,69 @@
 }
 
 // МИКСИНЫ
+@mixin media-max($width) {
+  @media (max-width: $width) {
+    @content;
+  }
+}
+
+@mixin media-min($width) {
+  @media (min-width: $width) {
+    @content;
+  }
+}
+
+@mixin media-between($min, $max) {
+  @media (min-width: $min) and (max-width: $max) {
+    @content;
+  }
+}
+
+@mixin button-base {
+	width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 21px 48px;
+  gap: 10px;
+  width: 100%;
+  max-width: 72%;
+  background: linear-gradient(270deg, #D8775D, #FF8B32);
+  border-radius: 6px;
+  font-size: 18px;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 400;
+  letter-spacing: 2.5px;
+  text-decoration: none;
+  margin: 0 auto;
+  border: none;
+  cursor: pointer;
+  font-family: "PT Sans", sans-serif;
+  
+  @include smooth-hover;
+  
+  &:hover {
+    background: linear-gradient(270deg, #DB5314, #E5602A);
+    color: white;
+    text-decoration: none;
+  }
+}
+
+@mixin button-variant($bg-color) {
+  background: $bg-color;
+  
+  &:hover {
+    background: darken($bg-color, 10%);
+  }
+}
+
+@mixin button-size($padding: 21px 48px, $font-size: 18px) {
+  padding: $padding;
+  font-size: $font-size;
+}
+
 @mixin smooth-hover {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   &:hover {
@@ -110,7 +173,6 @@ html {
 
 body {
   font-family: var(--font-primary);
-  font-size: 18px;
   color: var(--color-text);
   overflow-x: hidden;
 }
@@ -170,7 +232,7 @@ h2 {
   }
 }
 
-ul:not(.list-unstyled):not(.list_bullet):not(.flip):not(.main-navigation__list) {
+ul:not(.list-unstyled):not(.list_bullet):not(.flip):not(.navigation__list) {
   list-style: none;
   padding-left: 30px;
   li {
@@ -193,7 +255,7 @@ ul:not(.list-unstyled):not(.list_bullet):not(.flip):not(.main-navigation__list) 
   }
 }
 
-// СЕКЦИИ (только специфичные стили)
+// СЕКЦИИ 
 section {
   padding-top: 100px;
   padding-bottom: 100px;
@@ -235,11 +297,6 @@ section {
   cursor: pointer;
   @include smooth-hover;
   
-  &:hover {
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-    background: #DB5314;
-  }
-  
   @include respond-to(xl) {
     padding: 21px 20px;
   }
@@ -254,7 +311,7 @@ section {
   }
 }
 
-// АНИМАЦИИ (только неконфликтующие)
+// АНИМАЦИИ 
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -264,7 +321,7 @@ section {
   @include fade-in(0.5s);
 }
 
-// ДОПОЛНИТЕЛЬНЫЕ УТИЛИТЫ (которых нет в Bootstrap)
+// ДОПОЛНИТЕЛЬНЫЕ УТИЛИТЫ 
 
 .text-primary { color: var(--color-primary); }
 .text-secondary { color: var(--color-secondary); }
@@ -274,7 +331,6 @@ section {
 .bg-gray { background-color: var(--color-gray-light); }
 
 // СКРЫТЫЕ ЭЛЕМЕНТЫ
-
 .visually-hidden {
   @include visually-hidden;
 }

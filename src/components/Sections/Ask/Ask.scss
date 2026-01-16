@@ -1,7 +1,7 @@
 @use '@/styles/global' as *;
 
 .ask {
-    background-image: url(../images/ask/bg.jpg);
+    background-image: url("/images/ask/bg.webp");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
@@ -17,13 +17,13 @@
         left: 0;
         right: 0;
         bottom: 0;
-				background: linear-gradient(
-					to right,
-					rgba(255, 255, 255, 0.3) 0%,
-					rgba(255, 255, 255, 0.8) 15%,
-					rgba(255, 255, 255, 0.8) 85%,
-					rgba(255, 255, 255, 0.3) 100%
-					);
+        background: linear-gradient(
+            to right,
+            rgba(255, 255, 255, 0.3) 0%,
+            rgba(255, 255, 255, 0.8) 15%,
+            rgba(255, 255, 255, 0.8) 85%,
+            rgba(255, 255, 255, 0.3) 100%
+        );
         z-index: 1;
         pointer-events: none;
     }
@@ -31,6 +31,7 @@
     > .container {
         position: relative;
         z-index: 2;
+				padding: 0 0 0 0;
     }
 
     &__title {
@@ -40,27 +41,6 @@
         margin-bottom: 60px;
         font-size: 82px;
         line-height: 74px;
-
-        @media (max-width: 991.98px) {
-            font-size: 76px;
-            line-height: 70px;
-        }
-
-        @media (max-width: 767.98px) {
-            font-size: 70px;
-            line-height: 64px;
-        }
-
-        @media (max-width: 575.98px) {
-            font-size: 63px;
-            line-height: 59px;
-        }
-
-        @media (max-width: 419.98px) {
-            font-size: 52px;
-            line-height: 47px;
-            letter-spacing: -0.6px;
-        }
     }
 
     &__subtitle {
@@ -71,20 +51,11 @@
         margin-bottom: 20px;
         text-align: center;
         line-height: 1.2;
-
-        @media (max-width: 575.98px) {
-            font-size: 20px;
-        }
     }
 
     &__row {
         display: flex;
         justify-content: center;
-
-        @media (max-width: 767.98px) {
-            flex-direction: column;
-            align-items: center;
-        }
     }
 
     &__buttons-wrapper {
@@ -94,6 +65,14 @@
         justify-content: center;
         flex-wrap: wrap;
         margin-bottom: 20px;
+        position: relative;
+    }
+
+    // Обертка для WhatsApp кнопки с тултипом
+    &__whatsapp-wrapper {
+        position: relative;
+        display: block;
+        width: 100%;
     }
 
     &__button {
@@ -118,10 +97,8 @@
         cursor: pointer;
         font-family: "PT Sans";
         
-        // ИСПОЛЬЗУЕМ МИКСИН
         @include smooth-hover;
         
-        // Дополнительные свойства для ховера
         &:hover {
             background: linear-gradient(270deg, #DB5314, #E5602A);
             color: white;
@@ -130,45 +107,10 @@
 
         &--telegram {
             background: linear-gradient(270deg, #D8775D, #FF8B32);
-            
-            &:hover {
-                background: linear-gradient(270deg, #DB5314, #E5602A);
-            }
         }
 
         &--whatsapp {
             background: linear-gradient(270deg, #D8775D, #FF8B32);
-            
-            &:hover {
-                background: linear-gradient(270deg, #DB5314, #E5602A);
-            }
-        }
-
-        @media (max-width: 1199.98px) {
-            padding: 21px 20px;
-        }
-
-        @media (max-width: 991.98px) {
-            max-width: unset;
-            width: 260px;
-            padding: 21px 48px;
-        }
-
-        @media (max-width: 575.98px) {
-            margin: 0 auto;
-            padding: 20px 30px;
-        }
-
-        @media (max-width: 419.98px) {
-            width: 280px;
-        }
-
-        @media (max-width: 481px) {
-            letter-spacing: 0.2px;
-        }
-
-        @media (max-width: 767.98px) {
-            margin-bottom: 30px;
         }
     }
 
@@ -182,18 +124,84 @@
             transform: translateX(4px);
         }
     }
+}
 
-    @media (max-width: 575.98px) {
+// WebP поддержка
+.webp .ask {
+    background-image: url("../images/ask/bg.webp");
+}
+
+@media (max-width: 1199.98px) {
+    .ask__button {
+        padding: 21px 20px;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .ask__title {
+        font-size: 76px;
+        line-height: 70px;
+    }
+
+    .ask__button {
+        max-width: unset;
+        width: 260px;
+        padding: 21px 48px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .ask__title {
+        font-size: 70px;
+        line-height: 64px;
+    }
+
+    .ask__row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .ask__button {
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .ask {
         background-image: url("../images/ask/bg-mobile.jpg");
         padding-top: 60px;
         padding-bottom: 60px;
     }
+
+    .ask__title {
+        font-size: 63px;
+        line-height: 59px;
+    }
+
+    .ask__subtitle {
+        font-size: 20px;
+    }
+
+    .ask__button {
+        margin: 0 auto;
+        padding: 20px 30px;
+    }
 }
 
-.ask {
-    background-image: url("../images/ask/bg.webp");
+@media (max-width: 481px) {
+    .ask__button {
+        letter-spacing: 0.2px;
+    }
+}
 
-    @media (max-width: 575.98px) {
-        background-image: url("../images/ask/bg-mobile.webp");
+@media (max-width: 419.98px) {
+    .ask__title {
+        font-size: 52px;
+        line-height: 47px;
+        letter-spacing: -0.6px;
+    }
+
+    .ask__button {
+        width: 280px;
     }
 }

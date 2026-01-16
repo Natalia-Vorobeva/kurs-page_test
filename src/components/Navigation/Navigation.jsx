@@ -1,12 +1,16 @@
 import { useState, useEffect } from 'react';
 import './Navigation.scss';
+import WaTooltip from '../WaTooltip/WaTooltip';
+import Toast from '../Toast/Toast';
 
 const Navigation = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [activeLink, setActiveLink] = useState(null);
-    const [showWaPopup, setShowWaPopup] = useState(false);
     const [showCopyToast, setShowCopyToast] = useState(false);
     const [toastMessage, setToastMessage] = useState('');
+    
+    const [showWaTooltipNav, setShowWaTooltipNav] = useState(false);
+    const [showWaTooltipMobile, setShowWaTooltipMobile] = useState(false);
 
     const navItems = [
         { id: 'about-course', label: 'О чем курс' },
@@ -18,7 +22,6 @@ const Navigation = () => {
         if (typeof window !== 'undefined' && window.$) {
             const $ = window.$;
             
-            // Скрытие кнопки при скролле для мобильных
             let scrollTimer;
             const $button = $('.navigation__mobile-toggle');
             
@@ -27,7 +30,7 @@ const Navigation = () => {
                     $button.css({
                         opacity: '0',
                         visibility: 'hidden',
-                        transition: 'opacity 0.15s ease, visibility 0.15s ease' // Ускоренная анимация
+                        transition: 'opacity 0.15s ease, visibility 0.15s ease'
                     });
 
                     clearTimeout(scrollTimer);
@@ -39,7 +42,7 @@ const Navigation = () => {
                                 visibility: 'visible'
                             });
                         }
-                    }, 800); // Уменьшено время до 800мс
+                    }, 800);
                 }
             };
 
@@ -141,7 +144,8 @@ const Navigation = () => {
     return (
         <>
             <nav className="navigation">
-                <div className="navigation__container container">
+							
+                <div className={`navigation__container container ${isMenuOpen ? 'navigation__container--hidden' : ''}`}>
                     <div className="row align-items-center">
                         <div className="col-lg-1">
                             <a
@@ -150,7 +154,7 @@ const Navigation = () => {
                                 onClick={scrollToTop}
                             >
                                 <img
-                                    src="/vite.svg"
+                                    src="/images/header/sobaka.svg"
                                     alt="Собака рисует"
                                     className="navigation__logo-image"
                                 />
@@ -184,11 +188,28 @@ const Navigation = () => {
 
                         <div className="col-12 col-lg-2">
                             <div className="navigation__social">
-                                <button
-                                    className="navigation__social-btn navigation__social-btn--whatsapp"
-                                    aria-label="WhatsApp"
-                                    onClick={() => setShowWaPopup(true)}
-                                ></button>
+                                {/* Контейнер для кнопки WhatsApp с тултипом */}
+                                <div className="navigation__whatsapp-container">
+                                    <button
+                                        className="navigation__social-btn navigation__social-btn--whatsapp"
+                                        aria-label="WhatsApp"
+                                        onClick={() => {
+                                            setShowWaTooltipNav(!showWaTooltipNav);
+                                            if (showWaTooltipMobile) {
+                                                setShowWaTooltipMobile(false);
+                                            }
+                                        }}
+                                    ></button>
+                                    
+                                    {showWaTooltipNav && (
+                                        <WaTooltip
+                                            isOpen={showWaTooltipNav}
+                                            onClose={() => setShowWaTooltipNav(false)}
+                                            placement="bottom"
+                                            onCopy={copyWithToast}
+                                        />
+                                    )}
+                                </div>
                                 
                                 <a
                                     href="https://t.me/sobaka_help_bot"
@@ -233,7 +254,7 @@ const Navigation = () => {
                         </a>
                     </div>
 
-                    <ul className="navigation__mobile-list">
+                    <ul className="navigation__mobile-list list-unstyled">
                         {navItems.map((item) => (
                             <li
                                 key={item.id}
@@ -265,15 +286,29 @@ const Navigation = () => {
                             className="navigation__social-btn navigation__social-btn--telegram"
                             aria-label="Telegram"
                         ></a>
-                        <button
-                            className="navigation__social-btn navigation__social-btn--whatsapp"
-                            aria-label="WhatsApp"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                setShowWaPopup(true);
-                                setIsMenuOpen(false);
-                            }}
-                        ></button>
+                        
+                        {/* Контейнер для кнопки WhatsApp в мобильном меню */}
+                        <div className="navigation__whatsapp-container">
+                            <button
+                                className="navigation__social-btn navigation__social-btn--whatsapp"
+                                aria-label="WhatsApp"
+                                onClick={() => {
+                                    setShowWaTooltipMobile(!showWaTooltipMobile);
+                                    if (showWaTooltipNav) {
+                                        setShowWaTooltipNav(false);
+                                    }
+                                }}
+                            ></button>
+                            
+                            {showWaTooltipMobile && (
+                                <WaTooltip
+                                    isOpen={showWaTooltipMobile}
+                                    onClose={() => setShowWaTooltipMobile(false)}
+                                    placement="top"
+                                    onCopy={copyWithToast}
+                                />
+                            )}
+                        </div>
                     </div>
                 </div>
 
@@ -285,72 +320,11 @@ const Navigation = () => {
                 )}
             </nav>
 
-            <div className="navigation__spacer"></div>
-
-            {/* Обновленное модальное окно */}
-            <div className={`popup ${showWaPopup ? 'popup--active' : ''}`} onClick={() => setShowWaPopup(false)}>
-                <div className="popup__content" onClick={e => e.stopPropagation()}>
-                    <button 
-                        className="popup__close" 
-                        onClick={() => setShowWaPopup(false)}
-                        aria-label="Закрыть"
-                    >
-                        &times;
-                    </button>
-                    
-                    <div className="popup__icon">
-                        <svg viewBox="0 0 24 24" fill="white">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                        </svg>
-                    </div>
-                    
-                    <h3 className="popup__title">Свяжитесь с нами</h3>
-                    <p className="popup__description">
-                        Нажмите на номер телефона, чтобы скопировать его или перейдите в WhatsApp для быстрой связи
-                    </p>
-                    
-                    <a 
-                        href="tel:+74952041261" 
-                        className="popup__phone"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            copyWithToast('+7 (495) 204-12-61', 'Номер телефона скопирован');
-                        }}
-                    >
-                        +7 (495) 204-12-61
-                    </a>
-                    
-                    <div className="popup__buttons">
-                        <a 
-                            href="https://wa.me/74952041261" 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="popup__button popup__button--primary"
-                            onClick={() => setShowWaPopup(false)}
-                        >
-                            Написать в WhatsApp
-                        </a>
-                        <button 
-                            className="popup__button popup__button--secondary"
-                            onClick={() => {
-                                copyWithToast('+7 (495) 204-12-61', 'Номер телефона скопирован');
-                                setShowWaPopup(false);
-                            }}
-                        >
-                            Скопировать номер
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            {showCopyToast && (
-                <div className="toast toast--active" onClick={() => setShowCopyToast(false)}>
-                    <svg className="toast__icon" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-                    </svg>
-                    <div className="toast__text">{toastMessage}</div>
-                </div>
-            )}
+            <Toast 
+                message={toastMessage}
+                isVisible={showCopyToast}
+                onClose={() => setShowCopyToast(false)}
+            />
         </>
     );
 };

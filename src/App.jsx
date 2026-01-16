@@ -1,10 +1,4 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import './styles/variables.scss';
-// import './styles/typography.css';
-// import './styles/base.css';
-// import './styles/buttons.css';
-// import './styles/sections.css';
-
 import Navigation from './components/Navigation/Navigation';
 import Main from './components/Main/Main';
 import About from './components/Sections/About/About';

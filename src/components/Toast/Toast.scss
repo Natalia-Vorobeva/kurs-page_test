@@ -1,0 +1,37 @@
+.toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 15px 25px;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+  z-index: 10001;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 300px;
+  border-left: 4px solid #8BDC7A;
+  cursor: pointer;
+
+  &--active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+    color: #8BDC7A;
+    flex-shrink: 0;
+  }
+
+  &__text {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.4;
+  }
+}

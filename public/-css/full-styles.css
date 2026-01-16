@@ -1882,8 +1882,8 @@ button .materials:hover {
   }
 }
 #packages .container {
-  margin: 0 auto;
-  overflow: hidden;
+  /* margin: 0 auto;
+  overflow: hidden; */
   padding-top: 20px;
 }
 #packages .packages__item {

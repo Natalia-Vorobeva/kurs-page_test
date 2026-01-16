@@ -1,5 +1,4 @@
-import React from 'react';
-import './About.css';
+import './About.scss';
 
 const About = () => {
     return (
@@ -7,13 +6,12 @@ const About = () => {
             <div className="container">
                 <div className="row">
                     <div className="col-12">
-                        <h2>О чем курс?</h2>
+                        <h2 className="about__title">О чем курс?</h2>
                     </div>
                 </div>
 
-                <div className="about-row">
-									{/* Изображение - на десктопе слева, на мобильных снизу */}
-                    <div className="col-lg-6 col-12">
+                <div className="about__row">
+                    <div className="col-lg-6 col-12 about__image-col">
                         <picture>
                             <source
                                 type="image/webp"
@@ -30,16 +28,17 @@ const About = () => {
                                 srcSet="/images/about/1-2x-scale-2_00x.webp"
                             />
                             <img
-                                className="img-fluid about-img"
+                                className="img-fluid about__image"
                                 src="/images/about/1-2x-scale-2_00x.jpg"
                                 alt="Пример работы курса"
                                 loading="lazy"
+                                width="540"
+                                height="400"
                             />
                         </picture>
-                    </div>
-                    {/* Текст - на десктопе справа, на мобильных сверху */}
-                    <div className="col-lg-6 col-12">
-                        <div className="about-text">
+                    </div>                    
+                    <div className="col-lg-6 col-12 about__content-col">
+                        <div className="about__text">
                             <p>
                                 Я подготовил для вас <strong>12 пейзажей</strong>: от ретро Петербурга до сегодняшних дней.
                                 Вы научитесь не просто передавать художественные образы и замыслы, а <strong>оживлять их на бумаге</strong>.
@@ -52,8 +51,6 @@ const About = () => {
                             </p>
                         </div>
                     </div>
-
-                    
                 </div>
             </div>
         </section>

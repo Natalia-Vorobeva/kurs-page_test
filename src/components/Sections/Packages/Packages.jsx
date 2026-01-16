@@ -1,134 +1,53 @@
-import React, { useState, useEffect } from 'react';
-import './Packages.css';
+import { useEffect } from 'react';
+import './Packages.scss';
+import { currencyRates, packagesData } from '../../../constants/constants';
 
 const Packages = () => {
-  const [activeCurrency, setActiveCurrency] = useState('RUB');
-  
-  const currencyRates = {
-    RUB: { value: 1, symbol: '₽' },
-    USD: { value: 70, symbol: '$' },
-    EUR: { value: 80, symbol: '€' },
-    UAH: { value: 2.134, symbol: '₴' }
-  };
-
-  const packagesData = [
-    {
-      id: 1,
-      title: '«Рисую сам»',
-      priceRUB: 7990,
-      features: [
-        '12 пейзажей: от ретро Петербурга до сегодняшних дней',
-        '17 уроков : теория + практика + развивающие упражнения',
-        '«Разморозка курса» - возможность начать обучение в удобное время',
-        'Возможность смотреть разборы картин других участников',
-        'Бессрочный доступ к материалам',
-        { text: 'Разбор ваших рисунков 60 дней', included: false },
-        { text: 'Личная часовая онлайн-консультация с экспертом курса', included: false },
-        { 
-          text: '+1000 бонусных рублей! Можно потратить при покупке курса на следующем марафоне. Сгорают через 3 месяца',
-          icon: true
-        }
-      ]
-    },
-    {
-      id: 2,
-      title: '«С поддержкой»',
-      priceRUB: 9990,
-      features: [
-        '12 пейзажей: от ретро Петербурга до сегодняшних дней',
-        '17 уроков : теория + практика + развивающие упражнения',
-        '«Разморозка курса» - возможность начать обучение в удобное время',
-        'Возможность смотреть разборы картин других участников',
-        'Бессрочный доступ к материалам',
-        { text: 'Разбор ваших рисунков 60 дней', included: true },
-        { text: 'Личная часовая онлайн-консультация с экспертом курса', included: false },
-        { 
-          text: '+1000 бонусных рублей! Можно потратить при покупке курса на следующем марафоне. Сгорают через 3 месяца',
-          icon: true
-        }
-      ]
-    },
-    {
-      id: 3,
-      title: '«VIP»',
-      priceRUB: 19990,
-      features: [
-        '12 пейзажей: от ретро Петербурга до сегодняшних дней',
-        '17 уроков : теория + практика + развивающие упражнения',
-        '«Разморозка курса» - возможность начать обучение в удобное время',
-        'Возможность смотреть разборы картин других участников',
-        'Бессрочный доступ к материалам',
-        { text: 'Разбор ваших рисунков 60 дней', included: true },
-        { text: 'Личная часовая онлайн-консультация с экспертом курса', included: true },
-        { 
-          text: '+1000 бонусных рублей! Можно потратить при покупке курса на следующем марафоне. Сгорают через 3 месяца',
-          icon: true
-        }
-      ]
-    }
-  ];
-
-  // Инициализация jQuery обработчиков
   useEffect(() => {
     if (typeof window !== 'undefined' && window.$) {
       const $ = window.$;
       
-      // Обработчик кликов на переключателях валют
-      $('.currency-code').on('click', function(e) {
-        e.preventDefault();
-        const currency = $(this).data('currency');
+      const initializeCurrencySwitchers = () => {
+        $('.packages__item').each(function() {
+          const $card = $(this);
+          const priceRUB = $card.data('price-rub');
+          
+          $card.find('.codes > button').off('click').on('click', function(e) {
+            e.preventDefault();
+            const currency = $(this).data('currency');
+            const rate = currencyRates[currency].value;
+            const symbol = currencyRates[currency].symbol;
+            
+            $card.find('.codes > button').removeClass('active');
+            $(this).addClass('active');
+            
+            if (priceRUB) {
+              const converted = Math.ceil(priceRUB / rate);
+              const formattedPrice = converted.toLocaleString('ru');
+              
+              $card.find('.packages__item-price-new span:first-child').text(formattedPrice);
+              $card.find('.packages__item-price-new .symbol').text(' ' + symbol);
+            }
+          });
+          
+          $card.find('.codes > button[data-currency="RUB"]').addClass('active');
+        });
         
-        // Удаляем активный класс у всех кнопок
-        $('.currency-code').removeClass('active');
-        // Добавляем активный класс текущей кнопке
-        $(this).addClass('active');
-        
-        // Обновляем состояние React
-        setActiveCurrency(currency);
-        
-        // Обновляем цены через jQuery
-        updatePricesWithJQuery(currency);
-      });
+        $('.button-big').off('click').on('click', function() {
+          const $item = $(this).closest('.packages__item');
+          const title = $item.find('.packages__item-title').text();
+          console.log(`Выбран тариф: ${title}`);
+        });
+      };
       
-      // Инициализация активной валюты
-      $('.currency-code[data-currency="' + activeCurrency + '"]').addClass('active');
-      updatePricesWithJQuery(activeCurrency);
+      initializeCurrencySwitchers();
       
       return () => {
-        $('.currency-code').off('click');
+        $('.codes > button').off('click');
+        $('.button-big').off('click');
       };
     }
   }, []);
-
-  // Обновление цен через jQuery
-  const updatePricesWithJQuery = (currency) => {
-    if (typeof window !== 'undefined' && window.$) {
-      const $ = window.$;
-      
-      // Для каждой карточки обновляем цену
-      $('.packages__item').each(function() {
-        const $item = $(this);
-        const priceRUB = $item.data('price-rub');
-        const rate = currencyRates[currency].value;
-        const symbol = currencyRates[currency].symbol;
-        
-        if (priceRUB) {
-          const converted = Math.ceil(priceRUB / rate);
-          const formattedPrice = converted.toLocaleString('ru');
-          
-          // Обновляем отображение цены
-          $item.find('.packages__item-price-new span:first-child').text(formattedPrice);
-          $item.find('.packages__item-price-new .symbol').text(' ' + symbol);
-        }
-      });
-    }
-  };
-
-  // Функция для расчета цены (используется при первом рендере)
-  const calculatePrice = (priceRUB, currency) => {
-    const converted = Math.ceil(priceRUB / currencyRates[currency].value);
-    return converted.toLocaleString('ru');
-  };
 
   return (
     <section id="packages" className="packages">
@@ -187,8 +106,8 @@ const Packages = () => {
                   <div className="packages__item-buy mt-auto">
                     <div className="packages__item-prices">
                       <div className="packages__item-price packages__item-price-new text-center mt-4">
-                        <span>{calculatePrice(pkg.priceRUB, activeCurrency)}</span>
-                        <span className="symbol"> {currencyRates[activeCurrency].symbol}</span>
+                        <span>{pkg.priceRUB.toLocaleString('ru')}</span>
+                        <span className="symbol"> ₽</span>
                       </div>
                     </div>
                     
@@ -208,10 +127,7 @@ const Packages = () => {
                     <div className="buttons my-5">
                       <button 
                         type="button"
-                        className="button button-big"
-                        onClick={() => {
-                          console.log(`Выбран тариф: ${pkg.title}`);
-                        }}
+                        className="button-big"
                       >
                         Принять участие
                       </button>

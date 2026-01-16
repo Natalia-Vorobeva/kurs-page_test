@@ -1,5 +1,4 @@
-import React from 'react';
-import './What.css';
+import './What.scss';
 
 const What = () => {
 	return (
@@ -12,11 +11,9 @@ const What = () => {
 					</div>
 					<div className="col-lg-4 col-12 what__background">
 						<picture>
-							<source type="image/webp" srcSet="images/what/img575.webp" media="(max-width: 575px)" />
-							{/* !!! сюда img575.jpg */}
+							<source type="image/webp" srcSet="images/what/img575.webp" media="(max-width: 575px)" />						
 							<source type="image/jpeg" srcSet="images/what/img-2x-scale-2_00x.jpg" media="(max-width: 575px)" />
 							<source type="image/webp" srcSet="images/what/img-2x-scale-2_00x.jpg" />
-							{/* <img className="img-fluid what-img" src="images/what/img-2x-scale-2_00x.webp" alt="" loading="lazy" /> */}
 							<img className="img-fluid what-img" src="images/what/img-2x-scale-2_00x.jpg" alt="" loading="lazy" />
 						</picture>
 					</div>
