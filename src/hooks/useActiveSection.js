@@ -8,7 +8,6 @@ const useActiveSection = (sectionIds, offset = 70) => {
       let current = '';
       const scrollPosition = window.scrollY + offset;
 
-      // Находим секцию, которая находится в области видимости
       for (const id of sectionIds) {
         const element = document.getElementById(id);
         if (element) {
@@ -19,17 +18,12 @@ const useActiveSection = (sectionIds, offset = 70) => {
           }
         }
       }
-
-      // Если мы в самом верху страницы, сбрасываем активную секцию
       if (scrollPosition < 100) {
         current = '';
       }
-
       setActiveSection(current);
     };
-
     window.addEventListener('scroll', handleScroll);
-    // Вызываем сразу, чтобы установить активную секцию при загрузке
     handleScroll();
 
     return () => window.removeEventListener('scroll', handleScroll);

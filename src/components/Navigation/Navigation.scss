@@ -11,22 +11,17 @@
     z-index: 100;
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
 
-    // ИЗМЕНЯЕМ ТОЛЬКО ЭТОТ БЛОК:
     &__container {
         transition: all 0.3s ease;
 
-        // На мобильных: ВСЕГДА скрываем весь хедер (лого, меню, соц.кнопки)
         @media (max-width: 991.98px) {
             display: none !important;
         }
-
-        // На десктопе: всегда показываем
+				
         @media (min-width: 992px) {
             display: block !important;
         }
     }
-
-    // ВСЕ ОСТАЛЬНЫЕ СТИЛИ ОСТАВЛЯЕМ БЕЗ ИЗМЕНЕНИЙ:
 
     &__logo {
         width: 100%;
@@ -103,7 +98,6 @@
         }
     }
 
-    // Контейнер для WhatsApp кнопки с тултипом
     &__whatsapp-container {
         position: relative;
         display: inline-block;
@@ -146,7 +140,6 @@
         }
     }
 
-    // БУРГЕР-КНОПКА - показываем только на мобильных
     &__mobile-toggle {
         position: fixed;
         top: 0;
@@ -172,13 +165,11 @@
             }
         }
 
-        // На мобильных: показываем
         @media (max-width: 991.98px) {
             display: block !important;
             z-index: 3333;
         }
 
-        // На десктопе: скрываем
         @media (min-width: 992px) {
             display: none !important;
         }
@@ -203,7 +194,6 @@
         }
     }
 
-    // БУРГЕР-МЕНЮ - показываем только на мобильных
     &__mobile {
         position: fixed;
         top: 0;
@@ -222,13 +212,11 @@
         &--open {
             right: 0;
         }
-
-        // На мобильных: показываем когда открыто
+				
         @media (max-width: 991.98px) {
             width: 280px;
         }
-
-        // На десктопе: никогда не показываем
+				
         @media (min-width: 992px) {
             display: none !important;
         }
@@ -292,7 +280,6 @@
         z-index: 101;
         animation: fadeIn 0.2s ease;
 
-        // На десктопе не показываем
         @media (min-width: 992px) {
             display: none !important;
         }

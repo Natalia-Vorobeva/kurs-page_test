@@ -68,7 +68,6 @@
         position: relative;
     }
 
-    // Обертка для WhatsApp кнопки с тултипом
     &__whatsapp-wrapper {
         position: relative;
         display: block;
@@ -126,7 +125,6 @@
     }
 }
 
-// WebP поддержка
 .webp .ask {
     background-image: url("../images/ask/bg.webp");
 }

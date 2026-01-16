@@ -73,10 +73,8 @@
   }
 }
 
-// Стили для модального окна внутри бургер-меню
 .navigation__mobile .wa-tooltip {
   @media (max-width: 991.98px) {
-    // Уменьшаем ширину для мобильного меню
     min-width: 180px;
     width: 180px;
     

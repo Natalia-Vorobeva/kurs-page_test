@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import './Packages.scss';
 import { currencyRates, packagesData } from '../../../constants/constants';
+import './Packages.scss';
 
 const Packages = () => {
   useEffect(() => {
