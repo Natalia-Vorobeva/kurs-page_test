@@ -4,7 +4,7 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
-	base: '/kurs-page_test/',
+	base: '/',
 	
   resolve: {
     alias: {
